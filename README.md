@@ -1,2 +1,2 @@
-# Harry-Potter-Quiz
-harry potter quiz
+# Student Mini Project
+student mini project
