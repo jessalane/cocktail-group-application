@@ -1,2 +1,2 @@
-# Student Mini Project
-student mini project
+# Cocktail Recipe Search
+cocktail recipe project
