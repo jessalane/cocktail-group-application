@@ -1,19 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css"/>
+        <link rel="stylesheet" type="text/css" href="./assets/jass.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/style.css" />
+      </head>
+    <title>Placeholder</title>
+    <body>
+<nav class="nav">
+  <div class="nav-left">
+    <a class="nav-item">
+      <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
+    </a>
+  </div>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>site title</title>
-  <link rel="stylesheet" type="text/css" href="./assets/jass.css" />
-  <link rel="stylesheet" type="text/css" href="./assets/style.css" />
-</head>
+  <div class="nav-center">
+    <a class="nav-item">
+      <span class="icon">
+        <i class="fa fa-github"></i>
+      </span>
+    </a>
+    <a class="nav-item">
+      <span class="icon">
+        <i class="fa fa-twitter"></i>
+      </span>
+    </a>
+  </div>
 
-<body>
-  <header id="hero">
-    <h1>header</h1>
-    <h2>sub header</h2>
+  <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+  <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+  <span class="nav-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
 
-  </header>
-</body>
+  <!-- This "nav-menu" is hidden on mobile -->
+  <!-- Add the modifier "is-active" to display it on mobile -->
+  <div class="nav-right nav-menu">
+    <a class="nav-item">
+      Home
+    </a>
+    <a class="nav-item">
+      Documentation
+    </a>
+    <a class="nav-item">
+      Blog
+    </a>
 
+    <span class="nav-item">
+    
+      <a class="button is-primary">
+        <span class="icon">
+          <i class="fa fa-download"></i>
+        </span>
+        <span>Download</span>
+      </a>
+    </span>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Cocktail Generator
+      </h1>
+      <h2 class="subtitle">
+        Input any ingredient you have and we will compile a list of drinks you can make!
+      </h2>
+    </div>
+  </div>
+</section>
+
+<div class="control">
+    <input class="input is-focused; border-color: blue;" type="text" placeholder="Focused input">
+  </div>
+
+  <script src="./assets/js/cocktail.js"></script>
+  <script src="./assets/js/ninja.js"></script>
+    </body>
 </html>
