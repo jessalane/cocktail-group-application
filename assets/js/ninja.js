@@ -1,13 +1,16 @@
- // MY API KEY AND THE URL
- const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
-		'X-RapidAPI-Host': 'calorieninjas.p.rapidapi.com'
-	}
-};
-
-fetch('https://calorieninjas.p.rapidapi.com/v1/nutrition?query=tomato', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
+// MY API KEY AND THE URL
+var APIKey = "K/T5UXdLDGG+gbua67VqQw==w2i8da76oBKobzcv";
+ 
+var query = "mojito";
+$.ajax({
+    method: 'GET',
+    url: 'https://api.calorieninjas.com/v1/nutrition?query=' + query,
+    headers: { 'X-Api-Key': APIKey },
+    contentType: 'application/json',
+    success: function(result) {
+        console.log(result);
+    },
+    error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+    }
+});
