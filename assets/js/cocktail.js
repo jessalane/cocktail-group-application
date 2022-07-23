@@ -25,7 +25,9 @@ function getApi() {
       var instructions = data.drinks[0].strInstructions;
       var drinks = data.drinks[0];
       // var id = data.drinks[i].idDrink;
-      var tags = data.drinks[i].strTags;
+      var tags = data.drinks[0].strTags;
+
+      // setting ingredients  measurement into array
       var ingredients = [{
               "ingredient": drinks.strIngredient1,
               "measure": drinks.strMeasure1
@@ -64,17 +66,14 @@ function getApi() {
               "measure": drinks.strMeasure12
           }, {
               "ingredient": drinks.strIngredient13,
-              "measure": drinks.strMeasure9
+              "measure": drinks.strMeasure13
           }, {
               "ingredient": drinks.strIngredient14,
-              "measure": drinks.strMeasure9
+              "measure": drinks.strMeasure14
           }, {
               "ingredient": drinks.strIngredient15,
-              "measure": drinks.strMeasure9
+              "measure": drinks.strMeasure15
           }];
-
-          // ingredients.forEach(ingredientsList);
-          console.log(ingredients);
 
 
 
@@ -84,6 +83,19 @@ function getApi() {
       $("#drinkImg").children(1).attr("src", drinkImg);
       $("#drinkTags").html(tags);
       $("#directions").html(instructions);
+
+      function pushIngredient() {
+        for(i =0; i < ingredients.length; i++) {
+        if (ingredients[i].ingredient !== null) {
+            if (ingredients[i].measure !== null) {
+                $("#ingredients-container").append(`<li> ● ${ingredients[i].measure} of ${ingredients[i].ingredient}</li>`);
+            } else {
+              $("#ingredients-container").append(`<li> ● ${ingredients[i].ingredient}</li>`);
+            }
+          }
+        }
+      }
+      $.each(pushIngredient(ingredients));
     }
   });
 }
@@ -161,66 +173,6 @@ getApi();
 //           dataRow.push(`<p><bold>Category: </bold>${drinks.strCategory}</p>`);
 //           dataRow.push(`<p><bold>Instructions: </bold>${drinks.strInstructions}</p>`);
 //           dataRow.push(`<p><bold>Ingredients: </bold> <ul style="list-style-type:disc;"></p>`);
-
-//           // element to add to the modal
-//           const ingredientToLoop = [{
-//               "ingredient": drinks.strIngredient1,
-//               "measure": drinks.strMeasure1
-//           }, {
-//               "ingredient": drinks.strIngredient2,
-//               "measure": drinks.strMeasure2
-//           }, {
-//               "ingredient": drinks.strIngredient3,
-//               "measure": drinks.strMeasure3
-//           }, {
-//               "ingredient": drinks.strIngredient4,
-//               "measure": drinks.strMeasure4
-//           }, {
-//               "ingredient": drinks.strIngredient5,
-//               "measure": drinks.strMeasure5
-//           }, {
-//               "ingredient": drinks.strIngredient6,
-//               "measure": drinks.strMeasure6
-//           }, {
-//               "ingredient": drinks.strIngredient7,
-//               "measure": drinks.strMeasure7
-//           }, {
-//               "ingredient": drinks.strIngredient8,
-//               "measure": drinks.strMeasure8
-//           }, {
-//               "ingredient": drinks.strIngredient9,
-//               "measure": drinks.strMeasure9
-//           }, {
-//               "ingredient": drinks.strIngredient10,
-//               "measure": drinks.strMeasure10
-//           }, {
-//               "ingredient": drinks.strIngredient11,
-//               "measure": drinks.strMeasure11
-//           }, {
-//               "ingredient": drinks.strIngredient12,
-//               "measure": drinks.strMeasure12
-//           }, {
-//               "ingredient": drinks.strIngredient13,
-//               "measure": drinks.strMeasure13
-//           }, {
-//               "ingredient": drinks.strIngredient14,
-//               "measure": drinks.strMeasure14
-//           }, {
-//               "ingredient": drinks.strIngredient15,
-//               "measure": drinks.strMeasure15
-//           }];
-
-//           ingredientToLoop.forEach(pushIngredient);
-
-//           function pushIngredient(drinks) {
-//               if (drinks.ingredient !== null) {
-//                   if (drinks.measure !== null) {
-//                       dataRow.push(`<li>${drinks.measure} of ${drinks.ingredient}</li>`);
-//                   } else {
-//                       dataRow.push(`<li>${drinks.ingredient}</li>`);
-//                   }
-//               }
-//           }
 
 //           dataRow.push(`</ul>`);
 //           tableRowsBody.push(`${dataRow}`);
