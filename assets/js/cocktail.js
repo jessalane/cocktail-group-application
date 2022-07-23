@@ -23,14 +23,66 @@ function getApi() {
       var drinkGlass = data.drinks[0].strGlass;
       var drinkImg = data.drinks[0].strDrinkThumb;
       var instructions = data.drinks[0].strInstructions;
+      var drinks = data.drinks[0];
       // var id = data.drinks[i].idDrink;
-      // var tags = data.drinks[i].strTags;
+      var tags = data.drinks[i].strTags;
+      var ingredients = [{
+              "ingredient": drinks.strIngredient1,
+              "measure": drinks.strMeasure1
+          }, {
+              "ingredient": drinks.strIngredient2,
+              "measure": drinks.strMeasure2
+          }, {
+              "ingredient": drinks.strIngredient3,
+              "measure": drinks.strMeasure3
+          }, {
+              "ingredient": drinks.strIngredient4,
+              "measure": drinks.strMeasure4
+          }, {
+              "ingredient": drinks.strIngredient5,
+              "measure": drinks.strMeasure5
+          }, {
+              "ingredient": drinks.strIngredient6,
+              "measure": drinks.strMeasure6
+          }, {
+              "ingredient": drinks.strIngredient7,
+              "measure": drinks.strMeasure7
+          }, {
+              "ingredient": drinks.strIngredient8,
+              "measure": drinks.strMeasure8
+          }, {
+              "ingredient": drinks.strIngredient9,
+              "measure": drinks.strMeasure9
+          }, {
+              "ingredient": drinks.strIngredient10,
+              "measure": drinks.strMeasure10
+          }, {
+              "ingredient": drinks.strIngredient11,
+              "measure": drinks.strMeasure11
+          }, {
+              "ingredient": drinks.strIngredient12,
+              "measure": drinks.strMeasure12
+          }, {
+              "ingredient": drinks.strIngredient13,
+              "measure": drinks.strMeasure9
+          }, {
+              "ingredient": drinks.strIngredient14,
+              "measure": drinks.strMeasure9
+          }, {
+              "ingredient": drinks.strIngredient15,
+              "measure": drinks.strMeasure9
+          }];
+
+          // ingredients.forEach(ingredientsList);
+          console.log(ingredients);
+
+
 
       // inserting variables into recipe html
       $("#titleName").html(drinkName);
       $("#subGlass").html("use a " + drinkGlass);
       $("#drinkImg").children(1).attr("src", drinkImg);
-      // $("#drinkTags").html(drinkTags);
+      $("#drinkTags").html(tags);
       $("#directions").html(instructions);
     }
   });
@@ -94,67 +146,87 @@ getApi();
 
 // document.body.appendChild (testCocktailCard);
 
-function writeToModal(url) {
-  let tableRowsBody = [];
-  let el = document.getElementById("modal-cocktail");
 
-  callApi(url).then(function (response) {
-      data = response.drinks;
+// https:github.com/severian5it/CocktailWebApp/blob/master/assets/js/apiCall.js
+// function writeToModal(url) {
+//   let tableRowsBody = [];
+//   let el = document.getElementById("modal-cocktail");
 
-      data.forEach(function (item) {
-          let dataRow = [];
-          dataRow.push(`<p><bold>Glass: </bold>${item.strGlass}</p>`);
-          dataRow.push(`<p><bold>Category: </bold>${item.strCategory}</p>`);
-          dataRow.push(`<p><bold>Instructions: </bold>${item.strInstructions}</p>`);
-          dataRow.push(`<p><bold>Ingredients: </bold> <ul style="list-style-type:disc;"></p>`);
+//   callApi(url).then(function (response) {
+//       data = response.drinks;
 
-          // element to add to the modal
-          const ingredientToLoop = [{
-              "ingredient": item.strIngredient1,
-              "measure": item.strMeasure1
-          }, {
-              "ingredient": item.strIngredient2,
-              "measure": item.strMeasure2
-          }, {
-              "ingredient": item.strIngredient3,
-              "measure": item.strMeasure3
-          }, {
-              "ingredient": item.strIngredient4,
-              "measure": item.strMeasure4
-          }, {
-              "ingredient": item.strIngredient5,
-              "measure": item.strMeasure5
-          }, {
-              "ingredient": item.strIngredient6,
-              "measure": item.strMeasure6
-          }, {
-              "ingredient": item.strIngredient7,
-              "measure": item.strMeasure7
-          }, {
-              "ingredient": item.strIngredient8,
-              "measure": item.strMeasure8
-          }, {
-              "ingredient": item.strIngredient9,
-              "measure": item.strMeasure9
-          }];
+//       data.forEach(function (drinks) {
+//           let dataRow = [];
+//           dataRow.push(`<p><bold>Glass: </bold>${drinks.strGlass}</p>`);
+//           dataRow.push(`<p><bold>Category: </bold>${drinks.strCategory}</p>`);
+//           dataRow.push(`<p><bold>Instructions: </bold>${drinks.strInstructions}</p>`);
+//           dataRow.push(`<p><bold>Ingredients: </bold> <ul style="list-style-type:disc;"></p>`);
 
-          ingredientToLoop.forEach(pushIngredient);
+//           // element to add to the modal
+//           const ingredientToLoop = [{
+//               "ingredient": drinks.strIngredient1,
+//               "measure": drinks.strMeasure1
+//           }, {
+//               "ingredient": drinks.strIngredient2,
+//               "measure": drinks.strMeasure2
+//           }, {
+//               "ingredient": drinks.strIngredient3,
+//               "measure": drinks.strMeasure3
+//           }, {
+//               "ingredient": drinks.strIngredient4,
+//               "measure": drinks.strMeasure4
+//           }, {
+//               "ingredient": drinks.strIngredient5,
+//               "measure": drinks.strMeasure5
+//           }, {
+//               "ingredient": drinks.strIngredient6,
+//               "measure": drinks.strMeasure6
+//           }, {
+//               "ingredient": drinks.strIngredient7,
+//               "measure": drinks.strMeasure7
+//           }, {
+//               "ingredient": drinks.strIngredient8,
+//               "measure": drinks.strMeasure8
+//           }, {
+//               "ingredient": drinks.strIngredient9,
+//               "measure": drinks.strMeasure9
+//           }, {
+//               "ingredient": drinks.strIngredient10,
+//               "measure": drinks.strMeasure10
+//           }, {
+//               "ingredient": drinks.strIngredient11,
+//               "measure": drinks.strMeasure11
+//           }, {
+//               "ingredient": drinks.strIngredient12,
+//               "measure": drinks.strMeasure12
+//           }, {
+//               "ingredient": drinks.strIngredient13,
+//               "measure": drinks.strMeasure13
+//           }, {
+//               "ingredient": drinks.strIngredient14,
+//               "measure": drinks.strMeasure14
+//           }, {
+//               "ingredient": drinks.strIngredient15,
+//               "measure": drinks.strMeasure15
+//           }];
 
-          function pushIngredient(item) {
-              if (item.ingredient !== null) {
-                  if (item.measure !== null) {
-                      dataRow.push(`<li>${item.measure} of ${item.ingredient}</li>`);
-                  } else {
-                      dataRow.push(`<li>${item.ingredient}</li>`);
-                  }
-              }
-          }
+//           ingredientToLoop.forEach(pushIngredient);
 
-          dataRow.push(`</ul>`);
-          tableRowsBody.push(`${dataRow}`);
-      });
+//           function pushIngredient(drinks) {
+//               if (drinks.ingredient !== null) {
+//                   if (drinks.measure !== null) {
+//                       dataRow.push(`<li>${drinks.measure} of ${drinks.ingredient}</li>`);
+//                   } else {
+//                       dataRow.push(`<li>${drinks.ingredient}</li>`);
+//                   }
+//               }
+//           }
 
-      el.innerHTML = `${tableRowsBody}`.replace(/,/g, "");
+//           dataRow.push(`</ul>`);
+//           tableRowsBody.push(`${dataRow}`);
+//       });
 
-  })
-}
+//       el.innerHTML = `${tableRowsBody}`.replace(/,/g, "");
+
+//   })
+// }
