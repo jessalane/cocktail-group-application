@@ -116,18 +116,22 @@
     <!--recipe section-->
     <article class="message column">
       <div class="message-body" id="recipe">
-        <figure class="image is-128x128" style="float: right;">
+        <figure id="drinkImg" class="image is-128x128" style="float: right;">
           <img src="https://bulma.io/images/placeholders/256x256.png">
         </figure>
-        <p class="title is-3">name of the drink</p>
-        <p class="subtitle is-5">type of recommended glass</p>
+        <p id="titleName" class="title is-3">name of the drink</p>
+        <p id="subGlass" class="subtitle is-5">type of recommended glass</p>
         <ol type="A" style="margin-left: 50px;">
-          <li>ingredient</li>
-          <li>ingredient</li>
-          <li>ingredient</li>
+          <li><div id="strIngredient1"></div></li>
+          <li><div id="stringredient2"></div></li>
+          <li><div id="stringredient3"></div></li>
+          <li><div id="stringredient4"></div></li>
+          <li><div id="stringredient5"></div></li>
+          <li><div id="stringredient6"></div></li>
+          <li><div id="stringredient7"></div></li>
         </ol>
           <hr>
-        <p>directions</p>
+        <p id="directions">directions</p>
           <hr>
         <p>health facts?</p>
       </div>
@@ -138,11 +142,16 @@
   <!--end search and recipe container-->
 
   <!--begin multiple results popup-->
-  <div class="multiplePop">
+  <div id="multiplePop">
     <div class="card" style="width: 450px;">
       <div class="card-content">
         <div class="content">
+          <p class="title is-3">multiple results available</p>
           insert multiple results
+
+          <div class="control">
+            <button class="button is-primary" id="multipleSub">Submit</button>
+          </div>
         </div>
       </div>
     </div>

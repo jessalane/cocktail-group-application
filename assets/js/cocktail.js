@@ -18,15 +18,20 @@ function getApi() {
 
     for (var i = 0; i < data.drinks.length; i++) {
 
-      var drinkName = data.drinks[i].strDrink;
-      var drinkImg = data.drinks[i].strDrinkThumb;
-      var id = data.drinks[i].idDrink;
-      var instructions = data.drinks[i].strInstructions + i;
-      
-      console.log(id);
-    
-      // var cocktailCard = function (drinkName, drinkImg, id, instructions)
-      // recipe.append (cocktailCard);
+      // setting recipe variables from data
+      var drinkName = data.drinks[0].strDrink;
+      var drinkGlass = data.drinks[0].strGlass;
+      var drinkImg = data.drinks[0].strDrinkThumb;
+      var instructions = data.drinks[0].strInstructions;
+      // var id = data.drinks[i].idDrink;
+      // var tags = data.drinks[i].strTags;
+
+      // inserting variables into recipe html
+      $("#titleName").html(drinkName);
+      $("#subGlass").html("use a " + drinkGlass);
+      $("#drinkImg").children(1).attr("src", drinkImg);
+      // $("#drinkTags").html(drinkTags);
+      $("#directions").html(instructions);
     }
   });
 }
@@ -89,3 +94,67 @@ getApi();
 
 // document.body.appendChild (testCocktailCard);
 
+function writeToModal(url) {
+  let tableRowsBody = [];
+  let el = document.getElementById("modal-cocktail");
+
+  callApi(url).then(function (response) {
+      data = response.drinks;
+
+      data.forEach(function (item) {
+          let dataRow = [];
+          dataRow.push(`<p><bold>Glass: </bold>${item.strGlass}</p>`);
+          dataRow.push(`<p><bold>Category: </bold>${item.strCategory}</p>`);
+          dataRow.push(`<p><bold>Instructions: </bold>${item.strInstructions}</p>`);
+          dataRow.push(`<p><bold>Ingredients: </bold> <ul style="list-style-type:disc;"></p>`);
+
+          // element to add to the modal
+          const ingredientToLoop = [{
+              "ingredient": item.strIngredient1,
+              "measure": item.strMeasure1
+          }, {
+              "ingredient": item.strIngredient2,
+              "measure": item.strMeasure2
+          }, {
+              "ingredient": item.strIngredient3,
+              "measure": item.strMeasure3
+          }, {
+              "ingredient": item.strIngredient4,
+              "measure": item.strMeasure4
+          }, {
+              "ingredient": item.strIngredient5,
+              "measure": item.strMeasure5
+          }, {
+              "ingredient": item.strIngredient6,
+              "measure": item.strMeasure6
+          }, {
+              "ingredient": item.strIngredient7,
+              "measure": item.strMeasure7
+          }, {
+              "ingredient": item.strIngredient8,
+              "measure": item.strMeasure8
+          }, {
+              "ingredient": item.strIngredient9,
+              "measure": item.strMeasure9
+          }];
+
+          ingredientToLoop.forEach(pushIngredient);
+
+          function pushIngredient(item) {
+              if (item.ingredient !== null) {
+                  if (item.measure !== null) {
+                      dataRow.push(`<li>${item.measure} of ${item.ingredient}</li>`);
+                  } else {
+                      dataRow.push(`<li>${item.ingredient}</li>`);
+                  }
+              }
+          }
+
+          dataRow.push(`</ul>`);
+          tableRowsBody.push(`${dataRow}`);
+      });
+
+      el.innerHTML = `${tableRowsBody}`.replace(/,/g, "");
+
+  })
+}
