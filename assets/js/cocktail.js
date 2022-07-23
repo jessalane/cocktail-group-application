@@ -25,7 +25,7 @@ function getApi() {
       var instructions = data.drinks[0].strInstructions;
       var drinks = data.drinks[0];
       // var id = data.drinks[i].idDrink;
-      var tags = data.drinks[0].strTags;
+      var tags = data.drinks[0].strTags + " ";
 
       // setting ingredients  measurement into array
       var ingredients = [{
