@@ -2,6 +2,8 @@ var searchByName = $('#search-button');
 // Update ID to our running list
 var recipe = $('#recipe');
 // cocktailList.appendChild (testCocktailCard);
+var drunkSubmitEl = $('#drinkSubmit');
+
 
 function getApi() {
   var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
@@ -27,11 +29,30 @@ function getApi() {
       // recipe.append (cocktailCard);
     }
   });
-
-
 }
 
+$("#drinkSubmit").click(function(event) {
+  event.preventDefault();
+
+  var searchParam = "";
+
+  if ($("#ingredient").val()) {
+    searchParam += $("ingredient").val();
+    console.log(searchParam);
+}
+
+// $( "#target" ).click(function() {
+//   alert( "Handler for .click() called." );
+// });
+
+})
+
+
+
 getApi();
+
+
+
 
 
 // searchByName.click(getApi());
