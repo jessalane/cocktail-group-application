@@ -33,6 +33,7 @@ $("#yolo").click(function (event) {
 
 // getting API based on the search parameters sent
 function getApi(searchParameters) {
+  
   var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
 
   fetch(requestUrl)
@@ -73,6 +74,7 @@ function selectMultiple(data) {
 
   // captures click on the multipleSub button
   $("#multipleSub").on("click", function () {
+
 
     // sets the selected box value into a variable
     var selected = $("input[type='checkbox']:checked").val();
