@@ -5,6 +5,7 @@ var drunkSubmitEl = $('#drinkSubmit');
 
 
 function getApi(searchParameters) {
+  
   var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
 
   fetch(requestUrl)
@@ -33,11 +34,18 @@ function selectMultiple(data) {
   for(i = 0; i < data.drinks.length; i++) {
     var drinkOptions = data.drinks[i].strDrink;
 
-    $("#drinkOptions").append("<input type='checkbox' name='" + drinkOptions + "' value='" + drinkOptions + "'> <label for='" + drinkOptions + "'>"  + drinkOptions +  "</label>");
+    $("#drinkOptions").append("<input type='checkbox' class ='xOption' name='" + drinkOptions + "' value='" + drinkOptions + "'> <label for='" + drinkOptions + "'>"  + drinkOptions +  "</label><br>");
   }
 
-  $("#multipleSub").click(function (event) {
-    event.preventDefault();
+  $("#multipleSub").on("click", function () {
+
+    var selected = $("input[type='checkbox']:checked").val();
+
+    searchParameters =  "search.php?s=" + selected;
+
+    $("#multiplePop").css({
+      "visibility": "hidden"
+    });
 
     getApi(searchParameters);
   })

@@ -22,12 +22,43 @@
   height: 400px;
 }
 
-input[type='checkbox'] {
-  width: 100%;
+label {
+  width: 90%;
   padding: 5px 0;
 }
 
 .optionX {
   display: inline; 
-  padding: 10px 20px;
+}
+
+/* Larger devices */
+@media screen and (max-width: 1200px) {
+  #drinkOptions {
+    column-count: 3;
+    column-gap: 10px;
+  }
+}
+
+/* Larger devices */
+@media screen and (max-width: 992px) {
+  #drinkOptions {
+    column-count: 2;
+    column-gap: 10px;
+  }
+}
+
+/* Mid size devices */
+@media screen and (max-width: 768px) {
+  #drinkOptions {
+    column-count: 2;
+    column-gap: 10px;
+  }
+}
+
+/* Smaller devices */
+@media screen and (max-width: 576px) {
+  #drinkOptions {
+    column-count: 1;
+    column-gap: 10px;
+  }
 }
