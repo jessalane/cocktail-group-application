@@ -76,16 +76,6 @@
     </div>
   </section>
 
-
-
-  <div class="control has-icons-left">
-    <input class="input is-primary" type="text" placeholder="search for a specific cocktail"
-      style="background-color: transparent; border: 1px solid">
-    <span class="icon is-small is-left">
-      <i class="fas fa-search"></i>
-    </span>
-  </div>
-
   <!--search and recipe container-->
   <div class="columns is-desktop" style="padding: 20px;">
     <!--search aside section-->
@@ -93,20 +83,26 @@
       <div class="message-body">
         <h3 class="title is-3 is-spaced">advanced search</h3>
         <form id="drinkSearchForm">
-          <input id="ingredient" class="input is-primary is-rounded" type="text" placeholder="search by ingredient"><br><br>
-          <input id="" class="input is-primary is-rounded" type="text" placeholder="searcy by __"><br><br>
-          <input id="__" class="input is-primary is-rounded" type="text" placeholder="searcy by __"><br><br>
-          <div id="__" class="select is-primary is-rounded">
-            <select>
-              <option>select dropdown title</option>
-              <option>With options</option>
-              <option>With options</option>
-              <option>With options</option>
-              <option>With options</option>
-            </select>
-          </div><br><br>
+          <p class="control has-icons-left">
+            <input id="searchByName" class="input is-primary is-rounded" type="text" placeholder="search by cocktail name"><br><br>
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
           <div class="control">
-            <button class="button is-primary" id="drinkSubmit">Submit</button>
+            <button class="button is-primary" id="drinkSubmit1">Submit</button>
+          </div> <br><br>
+          <p class="control has-icons-left">
+            <input id="searchByIngredient" class="input is-primary is-rounded" type="text" placeholder="search by ingredient"><br><br>
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
+          <div class="control">
+            <button class="button is-primary" id="drinkSubmit2">Submit</button>
+          </div> <br><br>
+          <div class="control">
+            <button class="button is-primary" id="yolo">Generate random cocktail</button>
           </div>
         </form>
       </div> 
@@ -138,12 +134,12 @@
 
   <!--begin multiple results popup-->
   <div id="multiplePop">
-    <div class="card" style="width: 450px;">
+    <div class="card" style="width: 80%">
       <div class="card-content">
         <div class="content">
-          <p class="title is-3">multiple results available</p>
-          insert multiple results
+          <p class="title is-3">multiple results available</p><div id="drinkOptions"> 
 
+          </div>
           <div class="control">
             <button class="button is-primary" id="multipleSub">Submit</button>
           </div>

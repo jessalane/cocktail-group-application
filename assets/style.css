@@ -1,14 +1,33 @@
 #multiplePop {
-    background-color: rgba(0,0,0,0.7);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    display: none;
-  }
+  background-color: rgba(0,0,0,0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  visibility: hidden;
+}
+
+#drinkOptions {
+  column-count: 3;
+  column-gap: 10px;
+  text-align: justify;
+  line-height: 120%;
+  overflow: auto;
+  height: 400px;
+}
+
+input[type='checkbox'] {
+  width: 100%;
+  padding: 5px 0;
+}
+
+.optionX {
+  display: inline; 
+  padding: 10px 20px;
+}
