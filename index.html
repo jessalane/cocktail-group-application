@@ -30,38 +30,18 @@
 <body>
   <!--navbar markup starts-->
   <nav class="navbar is-light">
-    <div class="nav-left">
-      <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
-      <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-      <span class="nav-toggle">
-        <span>
-          <a href="https://www.thecocktaildb.com/api.php">
-            The Cocktail API
-          </a>
-        </span>
-        <span>
-          <a href="https://calorieninjas.com/api">
-            Calorie Ninja API
-          </a>
-        </span>
-        <span></span>
-      </span>
-      <a class="nav-item">
-        <!--some icon? floats left-->
+    <div class="navbar-brand navbar-start">
+      <img src="./assets/images/logo.png" class="logoStyle">
+    </div>
+
+    <div class="navbar-menu navbar-end is-active" id="navMenu">
+      <a class="navbar-item" href="#searchSection">
+        Search
       </a>
-    </div>
-
-    <div class="nav-center">
-      some group logo?
-    </div>
-
-    <!-- This "nav-menu" is hidden on mobile -->
-    <!-- Add the modifier "is-active" to display it on mobile -->
-    <div class="nav-right nav-menu">
-      <a class="nav-item" href="https://www.thecocktaildb.com/api.php">
+      <a class="navbar-item" href="https://www.thecocktaildb.com/api.php">
         The Cocktail API
       </a>
-      <a class="nav-item" href="https://calorieninjas.com/api">
+      <a class="navbar-item" href="https://calorieninjas.com/api">
         Calorie Ninja API
       </a>
     </div>
@@ -87,7 +67,8 @@
   <!--search and recipe container-->
   <div class="columns is-desktop" style="padding: 20px;">
     <!--search aside section-->
-    <aside class="message column is-one-third is-full-mobile is-full-tablet" style="margin-right: 10px;">
+    <aside id="searchSection" class="message column is-one-third is-full-mobile is-full-tablet"
+      style="margin-right: 10px;">
       <div class="message-body">
         <h3 class="title is-3 is-spaced">search</h3>
         <form id="drinkSearchForm">
@@ -141,52 +122,52 @@
           <div class="table-container">
             <table class="table is-striped is-hoverable">
               <!-- Your table content -->
-                <tr>
-                  <td>
-                    <b>protein:</b>
-                  </td>
-                  <td id="proteinNum">
-                    value1
-                  </td>
-                </tr>
+              <tr>
+                <td>
+                  <b>protein:</b>
+                </td>
+                <td id="proteinNum">
+                  value1
+                </td>
+              </tr>
 
-                <tr>
-                  <td>
-                    <b>fat:</b>
-                  </td>
-                  <td id="fatNum">
-                    value2
-                  </td>
-                </tr>
+              <tr>
+                <td>
+                  <b>fat:</b>
+                </td>
+                <td id="fatNum">
+                  value2
+                </td>
+              </tr>
 
-                <tr>
-                  <td>
-                    <b>sugar:</b>
-                  </td>
-                  <td id="sugarNum">
-                    value3
-                  </td>
-                </tr>
+              <tr>
+                <td>
+                  <b>sugar:</b>
+                </td>
+                <td id="sugarNum">
+                  value3
+                </td>
+              </tr>
 
-                <tr>
-                  <td>
-                    <b>calories:</b>
-                  </td>
-                  <td id="calorieNum">
-                    value4
-                  </td>
-                </tr>
+              <tr>
+                <td>
+                  <b>calories:</b>
+                </td>
+                <td id="calorieNum">
+                  value4
+                </td>
+              </tr>
 
-                <tr>
-                  <td>
-                    <b>carbs:</b>
-                  </td>
-                  <td id="carbNum">
-                    value4
-                  </td>
-                </tr>
+              <tr>
+                <td>
+                  <b>carbs:</b>
+                </td>
+                <td id="carbNum">
+                  value4
+                </td>
+              </tr>
 
-              </table>
+            </table>
           </div>
         </div>
       </div>
