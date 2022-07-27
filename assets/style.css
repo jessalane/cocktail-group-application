@@ -1,14 +1,25 @@
 #multiplePop {
-    background-color: rgba(0,0,0,0.7);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    display: none;
-  }
+  background-color: rgba(0,0,0,0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  visibility: hidden;
+}
+
+#drinkOptions {
+  width:  70%;
+  text-align: justify;
+  line-height: 120%;
+}
+
+.optionX {
+  display: inline; 
+  padding: 10px 20px;
+}
