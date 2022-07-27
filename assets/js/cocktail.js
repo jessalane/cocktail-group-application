@@ -33,7 +33,7 @@ $("#yolo").click(function (event) {
 
 // getting API based on the search parameters sent
 function getApi(searchParameters) {
-  
+
   var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
 
   fetch(requestUrl)
@@ -65,41 +65,57 @@ function selectMultiple(data) {
   $("#drinkOptions").empty();
 
   // looping i through available drinks
-  for(i = 0; i < data.drinks.length; i++) {
+  for (i = 0; i < data.drinks.length; i++) {
     var drinkOptions = data.drinks[i].strDrink;
 
     // appending drink names into an input checkbox
-    $("#drinkOptions").append("<input type='checkbox' class ='xOption' name='" + drinkOptions + "' value='" + drinkOptions + "'> <label for='" + drinkOptions + "'>"  + drinkOptions +  "</label><br>");
+    $("#drinkOptions").append("<input type='checkbox' class ='xOption' name='" + drinkOptions + "' value='" + drinkOptions + "'> <label for='" + drinkOptions + "'>" + drinkOptions + "</label><br>");
   }
+
+  // closes modal when clicking the close button
+  $("#closeButton").on("click", function() {
+    $("#multiplePop").css({
+      "visibility": "hidden"
+    });
+  })
+
 
   // captures click on the multipleSub button
   $("#multipleSub").on("click", function () {
 
-      // populateRecipe(data);
+    // populateRecipe(data);
 
     // sets the selected box value into a variable
     var selected = $("input[type='checkbox']:checked").val();
 
     // adds the selected variable as search parameters
-    searchParameters =  "search.php?s=" + selected;
+    searchParameters = "search.php?s=" + selected;
 
     // hides the modal
     $("#multiplePop").css({
       "visibility": "hidden"
     });
 
-    // sends new search parameters to get Api
-    getApi(searchParameters);
+    if (searchParameters.length > 0) {
+      populateRecipe(data);
+    } else {
+      // sends new search parameters to get Api
+      getApi(searchParameters);
+    }
   })
 }
 
 // populates the recipe field
 function populateRecipe(data) {
+
+  // getNinja(ingredients.join());
+
   $("article").css({
     "visibility": "visible"
   });
 
   for (var i = 0; i < data.drinks.length; i++) {
+
     // setting recipe variables from data
     var drinkName = data.drinks[0].strDrink;
     var drinkGlass = data.drinks[0].strGlass;
@@ -156,6 +172,7 @@ function populateRecipe(data) {
       "measure": drinks.strMeasure15
     }];
 
+    
     // inserting variables into recipe html
     $("#titleName").html(drinkName);
     $("#subGlass").html("use a " + drinkGlass);
@@ -171,7 +188,6 @@ function populateRecipe(data) {
       // inserts tags if it has value
       $("#drinkTags").html(tags);
     }
-
     // function rotating through populated ingredients
     function pushIngredient() {
       // emptying the ingredients before populating more
@@ -192,8 +208,49 @@ function populateRecipe(data) {
         }
       }
     }
-
   }
   // rotating through the pushIngredient function for each ingredient 
-  $.each(pushIngredient(ingredients));
+  $.each(pushIngredient(ingredients.ingredient));
+  getNinja();
+}
+
+function getNinja() {
+  var nutritionString = $("#ingredients-container").text();
+  nutritionString.replace("●", " ,");
+  console.log(nutritionString);
+
+  // LOCAL VARIABLES
+  var APIKey = "K/T5UXdLDGG+gbua67VqQw==w2i8da76oBKobzcv";
+
+  $.ajax({
+    method: 'GET',
+    url: 'https://api.calorieninjas.com/v1/nutrition?query=' + nutritionString,
+    headers: {
+      'X-Api-Key': APIKey
+    },
+    contentType: 'application/json',
+    success: function (data) {
+      // CONSOLE LOG THE DATA
+      console.log(data);
+
+      // NUTRITION VARIABLES
+      var calories = data.items[0].calories;
+      var fat = data.items[0].fat_total_g;
+      var carbs = data.items[0].carbohydrates_total_g;
+      var protein = data.items[0].protein_g;
+      var sugars = data.items[0].sugar_g;
+
+      // SET VARIABLES INTO HTML
+      $("#calorieNum").html(calories + " calories");
+      $("#proteinNum").html(protein + " grams of protein");
+      $("#fatNum").html(fat + " grams of fat");
+      $("#carbNum").html(carbs + " grams of carbohydrates");
+      $("#sugarNum").html(sugars + " grams of sugar");
+
+    },
+    error: function ajaxError(jqXHR) {
+      console.error('Error: ', jqXHR.responseText);
+    }
+
+  });
 }
