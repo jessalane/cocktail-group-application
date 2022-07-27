@@ -27,6 +27,7 @@ input:focus {
 
 button {
   background-color: #3A3151 !important;
+  font-family: 'Cormorant SC', serif !important;
 }
 
 article {
