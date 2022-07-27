@@ -49,6 +49,12 @@ article {
   visibility: hidden;
 }
 
+#closeButton {
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
 #drinkOptions {
   column-count: 3;
   column-gap: 10px;
