@@ -75,6 +75,7 @@ function selectMultiple(data) {
   // captures click on the multipleSub button
   $("#multipleSub").on("click", function () {
 
+      // populateRecipe(data);
 
     // sets the selected box value into a variable
     var selected = $("input[type='checkbox']:checked").val();
