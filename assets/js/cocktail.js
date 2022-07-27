@@ -227,11 +227,8 @@ function getNinja(query) {
       var protein = data.items[0].protein_g;
       var sugars = data.items[0].sugar_g;
 
-      console.log(protein);
-      console.log(fat);
-      console.log(sugars);
-      console.log(calories);
-      console.log(carbs);
+      // SET VARIABLES INTO HTML
+      
 
     },
     error: function ajaxError(jqXHR) {
