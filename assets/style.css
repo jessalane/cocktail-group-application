@@ -93,6 +93,13 @@ label {
 
 /* Larger devices */
 @media screen and (max-width: 992px) {
+  aside {
+    width: 100% !important;
+  }
+  .imageStyle {
+    width: 200px !important;
+    height: 200px !important;
+  }
   #drinkOptions {
     column-count: 2;
     column-gap: 10px;
@@ -101,6 +108,13 @@ label {
 
 /* Mid size devices */
 @media screen and (max-width: 768px) {
+  aside {
+    width: 100%;
+  }
+  .imageStyle {
+    width: 150px !important;
+    height: 150px !important;
+  }
   #drinkOptions {
     column-count: 2;
     column-gap: 10px;
@@ -109,6 +123,13 @@ label {
 
 /* Smaller devices */
 @media screen and (max-width: 576px) {
+  aside {
+    width: 100%;
+  }
+  .imageStyle {
+    width: 100px !important;
+    height: 100px !important;
+  }
   #drinkOptions {
     column-count: 1;
     column-gap: 10px;

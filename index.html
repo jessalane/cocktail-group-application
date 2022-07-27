@@ -65,9 +65,9 @@
   </section>
 
   <!--search and recipe container-->
-  <div class="columns is-desktop" style="padding: 20px;">
+  <div id="searchSection" class="columns is-desktop" style="padding: 20px;">
     <!--search aside section-->
-    <aside id="searchSection" class="message column is-one-third is-full-mobile is-full-tablet"
+    <aside class="message column is-one-third is-full-mobile is-full-tablet"
       style="margin-right: 10px;">
       <div class="message-body">
         <h3 class="title is-3 is-spaced">search</h3>
@@ -101,8 +101,8 @@
     <!--end advanced search-->
 
     <!--recipe section-->
-    <article class="message column ">
-      <div class="message-body" id="recipe">
+    <article class="message column">
+      <div id="searchSection" class="message-body" id="recipe">
         <figure id="drinkImg" class="image is-128x128 imageStyle" style="float: right;">
           <img src="https://bulma.io/images/placeholders/256x256.png">
         </figure>
@@ -173,7 +173,6 @@
       </div>
     </article>
     <!--end recipe section-->
-
   </div>
   <!--end search and recipe container-->
 
