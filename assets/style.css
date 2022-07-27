@@ -3,6 +3,30 @@
   background-size: cover;
 }
 
+.hero h1 {
+  font-family: 'Cormorant SC', serif;
+  font-size: 65px;
+}
+
+.hero h2 {
+  display: inline;
+  font-family: 'Cormorant SC', serif;
+  font-size: 20px;
+  border-top: 1px solid #fff;
+}
+
+input {
+  border: 1px solid #3A3151 !important;
+}
+
+input:focus {
+  box-shadow: 0 0 7px #3A3151 !important;
+}
+
+button {
+  background-color: #3A3151 !important;
+}
+
 article {
   visibility: hidden; 
 }
