@@ -78,6 +78,11 @@ label {
   display: inline; 
 }
 
+.imageStyle {
+  width: 250px !important;
+  height: 250px !important;
+}
+
 /* Larger devices */
 @media screen and (max-width: 1200px) {
   #drinkOptions {
