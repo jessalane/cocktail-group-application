@@ -88,7 +88,7 @@ function selectMultiple(data) {
       "visibility": "hidden"
     });
 
-    if (searchParameters > 0) {
+    if (searchParameters.length > 0) {
       populateRecipe(data);
     } else {
       // sends new search parameters to get Api
