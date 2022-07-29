@@ -1,6 +1,7 @@
 var searchByName = $('#search-button');
 var recipe = $('#recipe');
 var drunkSubmitEl = $('#drinkSubmit');
+var searchCount = 0;
 
 // set search param based on cocktail name
 $("#drinkSubmit1").click(function (event) {
@@ -55,9 +56,10 @@ function getApi(searchParameters) {
       // populates recipe if there is only one drink
       else {
         populateRecipe(data);
-      }
+      } 
     })
 }
+
 
 // populates the modal when there are multiple drink options
 function selectMultiple(data) {
@@ -102,10 +104,12 @@ function selectMultiple(data) {
 
     if (searchParameters.length > 0) {
       populateRecipe(data);
+      getApi(searchParameters);
     } else {
       // sends new search parameters to get Api
       getApi(searchParameters);
     }
+    // $("#multipleSub").off();
   })
 }
 
@@ -218,7 +222,7 @@ function populateRecipe(data) {
 function getNinja() {
   var nutritionString = $("#ingredients-container").text();
 
-
+  $("#multipleSub").off();
   // LOCAL VARIABLES
   var APIKey = "K/T5UXdLDGG+gbua67VqQw==w2i8da76oBKobzcv";
 
@@ -246,6 +250,8 @@ function getNinja() {
       var carbsSum = 0;
       var sugarsSum = 0;
 
+      console.log(data.items)
+      
       // PUSHING DATA ITEMS TO ARRAY, TURNING INTO INT
       for (let i = 0; i < data.items.length; i++) {
 
@@ -289,8 +295,15 @@ function getNinja() {
 };
 
 // Bug fixes:
-// -When searching for a drink, then searching for another without reloading, it continues to run through multiple for loops and populates several times before displaying no nutritional data. It looks like it run the for loop each time a successive search is ran, and it breaks the nutritional data after 3 searches.
+// -(Fixed with .stop on the multipleSub event listener) When searching for a drink, then searching for another without reloading, it continues to run through multiple for loops and populates several times before displaying no nutritional data. It looks like it run the for loop each time a successive search is ran, and it breaks the nutritional data after 3 searches.
+// Search by name is broken. Continues to pull up modal. 
+// Fix: add searchCounter, +1 after a search of the same name, reset to 0 after each time a recipe is populated.
+// -Nutrition sometimes populates, sometimes does not.
+// find new way to search drinks with multiple results
 
 // Ideas for further improvements (sprinkles):
 // -Convert CL (centiliters) to oz before running it through the sum function. 1 CL = 0.34 oz
+
+// Must add for shot at 100% grade
+// We need to use local storage for something, past search results?  populate last searched drink on load?
 
