@@ -6,20 +6,20 @@ var drunkSubmitEl = $('#drinkSubmit');
 $("#drinkSubmit1").click(function (event) {
   event.preventDefault();
   var searchByName = $('#searchByName').val();
-
+  searchType = true;
   searchParameters = "search.php?s=" + searchByName;
-
   getApi(searchParameters);
+  return searchType;
 })
 
 // set search parameters based on search by ingredient
 $("#drinkSubmit2").click(function (event) {
   event.preventDefault();
   var searchIngredient = $('#searchByIngredient').val();
-
+  searchType = true;
   searchParameters = "filter.php?i=" + searchIngredient;
-
   getApi(searchParameters);
+  return searchType;
 })
 
 // populate a random cocktail
@@ -73,12 +73,11 @@ function selectMultiple(data) {
   }
 
   // closes modal when clicking the close button
-  $("#closeButton").on("click", function() {
+  $("#closeButton").on("click", function () {
     $("#multiplePop").css({
       "visibility": "hidden"
     });
   })
-
 
   // captures click on the multipleSub button
   $("#multipleSub").on("click", function () {
@@ -89,7 +88,12 @@ function selectMultiple(data) {
     var selected = $("input[type='checkbox']:checked").val();
 
     // adds the selected variable as search parameters
-    searchParameters = "search.php?s=" + selected;
+    if (searchType === true) {
+      searchParameters = "search.php?s=" + selected;
+    }
+    else {
+      searchParameters = "filter.php?i=" + selected;
+    }
 
     // hides the modal
     $("#multiplePop").css({
@@ -169,7 +173,7 @@ function populateRecipe(data) {
       "measure": drinks.strMeasure15
     }];
 
-    
+
     // inserting variables into recipe html
     $("#titleName").html(drinkName);
     $("#subGlass").html("use a " + drinkGlass);
@@ -213,8 +217,7 @@ function populateRecipe(data) {
 
 function getNinja() {
   var nutritionString = $("#ingredients-container").text();
-  nutritionString.replace("●", " ,");
-  console.log(nutritionString);
+
 
   // LOCAL VARIABLES
   var APIKey = "K/T5UXdLDGG+gbua67VqQw==w2i8da76oBKobzcv";
@@ -227,27 +230,67 @@ function getNinja() {
     },
     contentType: 'application/json',
     success: function (data) {
-      // CONSOLE LOG THE DATA
-      console.log(data);
 
-      // NUTRITION VARIABLES
-      var calories = data.items[0].calories;
-      var fat = data.items[0].fat_total_g;
-      var carbs = data.items[0].carbohydrates_total_g;
-      var protein = data.items[0].protein_g;
-      var sugars = data.items[0].sugar_g;
+      // NUTRITION ARRAY VAR
+      var calArr = [];
+      var fatArr = [];
+      var proteinArr = [];
+      var carbsArr = [];
+      var sugarsArr = [];
 
-      // SET VARIABLES INTO HTML
-      $("#calorieNum").html(calories + " calories");
-      $("#proteinNum").html(protein + " grams of protein");
-      $("#fatNum").html(fat + " grams of fat");
-      $("#carbNum").html(carbs + " grams of carbohydrates");
-      $("#sugarNum").html(sugars + " grams of sugar");
+      // NUTRITION SUM VAR
+      var sum = 0;
+      var calSum = 0;
+      var fatSum = 0;
+      var proteinSum = 0;
+      var carbsSum = 0;
+      var sugarsSum = 0;
 
+      // PUSHING DATA ITEMS TO ARRAY, TURNING INTO INT
+      for (let i = 0; i < data.items.length; i++) {
+
+        calArr.push(parseInt(data.items[i].calories));
+        calSum = calSum + parseInt(data.items[i].calories);
+
+        fatArr.push(parseInt(data.items[i].fat_total_g));
+        fatSum = fatSum + parseInt(data.items[i].fat_total_g);
+
+        carbsArr.push(parseInt(data.items[i].carbohydrates_total_g));
+        carbsSum = carbsSum + parseInt(data.items[i].carbohydrates_total_g);
+
+        proteinArr.push(parseInt(data.items[i].protein_g));
+        proteinSum = proteinSum + parseInt(data.items[i].protein_g);
+
+        sugarsArr.push(parseInt(data.items[i].sugar_g));
+        sugarsSum = sugarsSum + parseInt(data.items[i].sugar_g);
+
+      }
+      // ADDING EACH ARRAY FOR A TOTAL SUM
+      $.each(calArr, function () { sum += parseFloat(this) || 0; });
+      $.each(fatArr, function () { sum += parseFloat(this) || 0; });
+      $.each(carbsArr, function () { sum += parseFloat(this) || 0; });
+      $.each(proteinArr, function () { sum += parseFloat(this) || 0; });
+      $.each(sugarsArr, function () { sum += parseFloat(this) || 0; });
+
+      // ADDING EACH FINAL SUM TO THE HTML
+      $("#calorieNum").html(calSum + " calories");
+      $("#proteinNum").html(proteinSum + " grams of protein");
+      $("#fatNum").html(fatSum + " grams of fat");
+      $("#carbNum").html(carbsSum + " grams of carbohydrates");
+      $("#sugarNum").html(sugarsSum + " grams of sugar");
     },
+
     error: function ajaxError(jqXHR) {
       console.error('Error: ', jqXHR.responseText);
     }
-
+    
   });
-}
+  return;
+};
+
+// Bug fixes:
+// -When searching for a drink, then searching for another without reloading, it continues to run through multiple for loops and populates several times before displaying no nutritional data. It looks like it run the for loop each time a successive search is ran, and it breaks the nutritional data after 3 searches.
+
+// Ideas for further improvements (sprinkles):
+// -Convert CL (centiliters) to oz before running it through the sum function. 1 CL = 0.34 oz
+
