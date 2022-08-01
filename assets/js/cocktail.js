@@ -3,6 +3,30 @@ var recipe = $('#recipe');
 var drunkSubmitEl = $('#drinkSubmit');
 var searchCount = 0;
 
+// pulls the lastCocktail from storage
+var storedCocktail = localStorage.getItem("lastCocktail");
+
+// checks if the pulled variable has value
+if (storedCocktail != null) {
+  searchParameters = "search.php?s=" + storedCocktail;
+
+  getApi2(searchParameters);
+}
+
+function getApi2(searchParameters) {
+
+  var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
+
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      populateRecipe(data);
+
+    })
+}
+
 // set search param based on cocktail name
 $("#drinkSubmit1").click(function (event) {
   event.preventDefault();
@@ -217,6 +241,12 @@ function populateRecipe(data) {
   // rotating through the pushIngredient function for each ingredient 
   $.each(pushIngredient(ingredients.ingredient));
   getNinja();
+
+  // sets populated recipe to a variable
+  var lastSearch = $("#titleName").text();
+
+  // stores last search to the local storage
+  localStorage.setItem("lastCocktail", lastSearch);
 }
 
 function getNinja() {
@@ -295,7 +325,6 @@ function getNinja() {
 };
 
 // Bug fixes:
-// -(Fixed with .stop on the multipleSub event listener) When searching for a drink, then searching for another without reloading, it continues to run through multiple for loops and populates several times before displaying no nutritional data. It looks like it run the for loop each time a successive search is ran, and it breaks the nutritional data after 3 searches.
 // Search by name is broken. Continues to pull up modal. 
 // Fix: add searchCounter, +1 after a search of the same name, reset to 0 after each time a recipe is populated.
 // -Nutrition sometimes populates, sometimes does not.
