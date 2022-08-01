@@ -375,11 +375,4 @@ function getNinja() {
   return;
 };
 
-// Bug fixes:
-// Search by name is broken. Continues to pull up modal. 
-// Fix: add searchCounter, +1 after a search of the same name, reset to 0 after each time a recipe is populated.
 // -Nutrition sometimes populates, sometimes does not.
-// find new way to search drinks with multiple results
-
-// Ideas for further improvements (sprinkles):
-// -Convert CL (centiliters) to oz before running it through the sum function. 1 CL = 0.34 oz
