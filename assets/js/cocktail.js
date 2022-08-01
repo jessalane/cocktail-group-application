@@ -13,20 +13,6 @@ if (storedCocktail != null) {
   getApi2(searchParameters);
 }
 
-function getApi2(searchParameters) {
-
-  var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
-
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      populateRecipe(data);
-
-    })
-}
-
 // set search param based on cocktail name
 $("#drinkSubmit1").click(function (event) {
   event.preventDefault();
@@ -80,7 +66,22 @@ function getApi(searchParameters) {
       // populates recipe if there is only one drink
       else {
         populateRecipe(data);
-      } 
+      }
+    })
+}
+
+// api search that wont pull the modal
+function getApi2(searchParameters) {
+
+  var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
+
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      populateRecipe(data);
+
     })
 }
 
@@ -116,8 +117,7 @@ function selectMultiple(data) {
     // adds the selected variable as search parameters
     if (searchType === true) {
       searchParameters = "search.php?s=" + selected;
-    }
-    else {
+    } else {
       searchParameters = "filter.php?i=" + selected;
     }
 
@@ -281,7 +281,7 @@ function getNinja() {
       var sugarsSum = 0;
 
       console.log(data.items)
-      
+
       // PUSHING DATA ITEMS TO ARRAY, TURNING INTO INT
       for (let i = 0; i < data.items.length; i++) {
 
@@ -302,11 +302,21 @@ function getNinja() {
 
       }
       // ADDING EACH ARRAY FOR A TOTAL SUM
-      $.each(calArr, function () { sum += parseFloat(this) || 0; });
-      $.each(fatArr, function () { sum += parseFloat(this) || 0; });
-      $.each(carbsArr, function () { sum += parseFloat(this) || 0; });
-      $.each(proteinArr, function () { sum += parseFloat(this) || 0; });
-      $.each(sugarsArr, function () { sum += parseFloat(this) || 0; });
+      $.each(calArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(fatArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(carbsArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(proteinArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(sugarsArr, function () {
+        sum += parseFloat(this) || 0;
+      });
 
       // ADDING EACH FINAL SUM TO THE HTML
       $("#calorieNum").html(calSum + " calories");
@@ -319,7 +329,7 @@ function getNinja() {
     error: function ajaxError(jqXHR) {
       console.error('Error: ', jqXHR.responseText);
     }
-    
+
   });
   return;
 };
@@ -332,7 +342,3 @@ function getNinja() {
 
 // Ideas for further improvements (sprinkles):
 // -Convert CL (centiliters) to oz before running it through the sum function. 1 CL = 0.34 oz
-
-// Must add for shot at 100% grade
-// We need to use local storage for something, past search results?  populate last searched drink on load?
-
