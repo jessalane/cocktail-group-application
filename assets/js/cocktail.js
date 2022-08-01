@@ -127,7 +127,6 @@ function selectMultiple(data) {
     });
 
     getApi2(searchParameters);
-    // $("#multipleSub").off();
   })
 }
 
@@ -231,9 +230,12 @@ function populateRecipe(data) {
         }
       }
     }
+
+    // sets click event on the convert button
     $("#convert").click(function (event) {
       event.preventDefault();
 
+      // sets measurements in an array
       var measureArr = [{
         "measure": drinks.strMeasure1
       }, {
@@ -266,13 +268,17 @@ function populateRecipe(data) {
         "measure": drinks.strMeasure15
       }];
 
+      // filtering the measurements array to convert it to oz
       var filterdMeasurements = measureArr.filter(item => item.measure)
       // var ryan = measureArr.filter(function(item) { return item.measure })
       var convertedMeasurements = filterdMeasurements.map(measure => {
         var splitter = measure.measure.split(" ")[0];
         return `${Math.round(splitter * 0.34 * 100) / 100} oz.`;
       });
+
+      // emptying the ingredients container
       $("#ingredients-container").empty();
+      // appending the converted measurements and ingredients to the html
       for (i = 0; i < convertedMeasurements.length; i++) {
         $("#ingredients-container").append(`<li> ● ${convertedMeasurements[i]} of ${ingredients[i].ingredient}</li>`);
         
@@ -374,5 +380,3 @@ function getNinja() {
   });
   return;
 };
-
-// -Nutrition sometimes populates, sometimes does not.
