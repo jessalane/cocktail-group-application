@@ -1,4 +1,4 @@
-# Cocktail Recipe Search
+# Cocktail Database
 
 ## Description
 Have you ever grown sick of the same tired cocktails you always turn to, but never enjoy  making up your own? The following database provides a wide number of cocktail recipes that can be searched by a specific cocktail name, or even an ingredient you wished to include. You will be prompted to select one result to display at a time. Once generated you will be given the suggested glass for use, and measurements for each ingredient. There will also be a table offering nutrition facts of each cocktail.
