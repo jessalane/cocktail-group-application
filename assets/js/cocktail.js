@@ -274,7 +274,8 @@ function populateRecipe(data) {
       });
       $("#ingredients-container").empty();
       for (i = 0; i < convertedMeasurements.length; i++) {
-        $("#ingredients-container").append(`<li> ● ${convertedMeasurements[i]}</li>`);
+        $("#ingredients-container").append(`<li> ● ${convertedMeasurements[i]} of ${ingredients[i].ingredient}</li>`);
+        
       };
     });
   }
