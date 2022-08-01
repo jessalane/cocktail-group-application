@@ -231,6 +231,52 @@ function populateRecipe(data) {
         }
       }
     }
+    $("#convert").click(function (event) {
+      event.preventDefault();
+
+      var measureArr = [{
+        "measure": drinks.strMeasure1
+      }, {
+        "measure": drinks.strMeasure2
+      }, {
+        "measure": drinks.strMeasure3
+      }, {
+        "measure": drinks.strMeasure4
+      }, {
+        "measure": drinks.strMeasure5
+      }, {
+        "measure": drinks.strMeasure6
+      }, {
+        "measure": drinks.strMeasure7
+      }, {
+        "measure": drinks.strMeasure8
+      }, {
+        "measure": drinks.strMeasure9
+      }, {
+        "measure": drinks.strMeasure10
+      }, {
+        "measure": drinks.strMeasure11
+      }, {
+        "measure": drinks.strMeasure12
+      }, {
+        "measure": drinks.strMeasure13
+      }, {
+        "measure": drinks.strMeasure14
+      }, {
+        "measure": drinks.strMeasure15
+      }];
+
+      var filterdMeasurements = measureArr.filter(item => item.measure)
+      // var ryan = measureArr.filter(function(item) { return item.measure })
+      var convertedMeasurements = filterdMeasurements.map(measure => {
+        var splitter = measure.measure.split(" ")[0];
+        return `${Math.round(splitter * 0.34 * 100) / 100} oz.`;
+      });
+      $("#ingredients-container").empty();
+      for (i = 0; i < convertedMeasurements.length; i++) {
+        $("#ingredients-container").append(`<li> ● ${convertedMeasurements[i]}</li>`);
+      };
+    });
   }
   // rotating through the pushIngredient function for each ingredient 
   $.each(pushIngredient(ingredients.ingredient));
