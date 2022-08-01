@@ -126,13 +126,7 @@ function selectMultiple(data) {
       "visibility": "hidden"
     });
 
-    if (searchParameters.length > 0) {
-      populateRecipe(data);
-      getApi(searchParameters);
-    } else {
-      // sends new search parameters to get Api
-      getApi(searchParameters);
-    }
+    getApi2(searchParameters);
     // $("#multipleSub").off();
   })
 }

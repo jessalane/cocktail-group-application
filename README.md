@@ -6,6 +6,6 @@ Have you ever grown sick of the same tired cocktails you always turn to, but nev
 ## Usage
 The following are two pictures of what the website should look like when opened in a browser. 
 
-![This is a screenshot image](INSERT LINK TO SCREENSHOT)
+![This is a screenshot image](./assets/images/screenshot.png)
 
 The following is a link to [the deployed code]([deployed link](UPDATE WITH LIVE LINK)).
