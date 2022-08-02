@@ -8,4 +8,4 @@ The following are two pictures of what the website should look like when opened 
 
 ![This is a screenshot image](./assets/images/screenshot.png)
 
-The following is a link to [the deployed code]([deployed link](UPDATE WITH LIVE LINK)).
+The following is a link to [the deployed code]([deployed link](https://jessalane.github.io/cocktail-group-application/)).
