@@ -1,25 +1,36 @@
 var searchByName = $('#search-button');
 var recipe = $('#recipe');
 var drunkSubmitEl = $('#drinkSubmit');
+var searchCount = 0;
+
+// pulls the lastCocktail from storage
+var storedCocktail = localStorage.getItem("lastCocktail");
+
+// checks if the pulled variable has value
+if (storedCocktail != null) {
+  searchParameters = "search.php?s=" + storedCocktail;
+
+  getApi2(searchParameters);
+}
 
 // set search param based on cocktail name
 $("#drinkSubmit1").click(function (event) {
   event.preventDefault();
   var searchByName = $('#searchByName').val();
-
+  searchType = true;
   searchParameters = "search.php?s=" + searchByName;
-
   getApi(searchParameters);
+  return searchType;
 })
 
 // set search parameters based on search by ingredient
 $("#drinkSubmit2").click(function (event) {
   event.preventDefault();
   var searchIngredient = $('#searchByIngredient').val();
-
+  searchType = true;
   searchParameters = "filter.php?i=" + searchIngredient;
-
   getApi(searchParameters);
+  return searchType;
 })
 
 // populate a random cocktail
@@ -33,7 +44,7 @@ $("#yolo").click(function (event) {
 
 // getting API based on the search parameters sent
 function getApi(searchParameters) {
-  
+
   var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
 
   fetch(requestUrl)
@@ -59,37 +70,70 @@ function getApi(searchParameters) {
     })
 }
 
+// api search that wont pull the modal
+function getApi2(searchParameters) {
+
+  var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/' + searchParameters;
+
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      populateRecipe(data);
+
+    })
+}
+
+
 // populates the modal when there are multiple drink options
 function selectMultiple(data) {
   // emptying the last search before populating more
   $("#drinkOptions").empty();
 
   // looping i through available drinks
-  for(i = 0; i < data.drinks.length; i++) {
+  for (i = 0; i < data.drinks.length; i++) {
     var drinkOptions = data.drinks[i].strDrink;
 
     // appending drink names into an input checkbox
-    $("#drinkOptions").append("<input type='checkbox' class ='xOption' name='" + drinkOptions + "' value='" + drinkOptions + "'> <label for='" + drinkOptions + "'>"  + drinkOptions +  "</label><br>");
+    $("#drinkOptions").append("<input type='checkbox' class ='xOption' name='" + drinkOptions + "' value='" + drinkOptions + "'> <label for='" + drinkOptions + "'>" + drinkOptions + "</label><br>");
   }
+
+  // closes modal when clicking the close button
+  $("#closeButton").on("click", function () {
+    $("#multiplePop").css({
+      "visibility": "hidden"
+    });
+  })
 
   // captures click on the multipleSub button
   $("#multipleSub").on("click", function () {
 
-      // populateRecipe(data);
+    // populateRecipe(data);
 
     // sets the selected box value into a variable
     var selected = $("input[type='checkbox']:checked").val();
 
     // adds the selected variable as search parameters
-    searchParameters =  "search.php?s=" + selected;
+    if (searchType === true) {
+      searchParameters = "search.php?s=" + selected;
+    } else {
+      searchParameters = "filter.php?i=" + selected;
+    }
 
     // hides the modal
     $("#multiplePop").css({
       "visibility": "hidden"
     });
 
-    // sends new search parameters to get Api
-    getApi(searchParameters);
+    if (searchParameters.length > 0) {
+      populateRecipe(data);
+      getApi(searchParameters);
+    } else {
+      // sends new search parameters to get Api
+      getApi(searchParameters);
+    }
+    // $("#multipleSub").off();
   })
 }
 
@@ -100,6 +144,7 @@ function populateRecipe(data) {
   });
 
   for (var i = 0; i < data.drinks.length; i++) {
+
     // setting recipe variables from data
     var drinkName = data.drinks[0].strDrink;
     var drinkGlass = data.drinks[0].strGlass;
@@ -156,6 +201,7 @@ function populateRecipe(data) {
       "measure": drinks.strMeasure15
     }];
 
+
     // inserting variables into recipe html
     $("#titleName").html(drinkName);
     $("#subGlass").html("use a " + drinkGlass);
@@ -171,7 +217,6 @@ function populateRecipe(data) {
       // inserts tags if it has value
       $("#drinkTags").html(tags);
     }
-
     // function rotating through populated ingredients
     function pushIngredient() {
       // emptying the ingredients before populating more
@@ -192,8 +237,156 @@ function populateRecipe(data) {
         }
       }
     }
+    $("#convert").click(function (event) {
+      event.preventDefault();
+
+      var measureArr = [{
+        "measure": drinks.strMeasure1
+      }, {
+        "measure": drinks.strMeasure2
+      }, {
+        "measure": drinks.strMeasure3
+      }, {
+        "measure": drinks.strMeasure4
+      }, {
+        "measure": drinks.strMeasure5
+      }, {
+        "measure": drinks.strMeasure6
+      }, {
+        "measure": drinks.strMeasure7
+      }, {
+        "measure": drinks.strMeasure8
+      }, {
+        "measure": drinks.strMeasure9
+      }, {
+        "measure": drinks.strMeasure10
+      }, {
+        "measure": drinks.strMeasure11
+      }, {
+        "measure": drinks.strMeasure12
+      }, {
+        "measure": drinks.strMeasure13
+      }, {
+        "measure": drinks.strMeasure14
+      }, {
+        "measure": drinks.strMeasure15
+      }];
+
+      var filterdMeasurements = measureArr.filter(item => item.measure)
+      // var ryan = measureArr.filter(function(item) { return item.measure })
+      var convertedMeasurements = filterdMeasurements.map(measure => {
+        var splitter = measure.measure.split(" ")[0];
+        return `${Math.round(splitter * 0.34 * 100) / 100} oz.`;
+      });
+      $("#ingredients-container").empty();
+      for (i = 0; i < convertedMeasurements.length; i++) {
+        $("#ingredients-container").append(`<li> ● ${convertedMeasurements[i]} of ${ingredients[i].ingredient}</li>`);
+        
+    };
 
   }
-  // rotating through the pushIngredient function for each ingredient 
-  $.each(pushIngredient(ingredients));
+
+    )}
+  $.each(pushIngredient(ingredients.ingredient));
+  getNinja();
+
+  // sets populated recipe to a variable
+  var lastSearch = $("#titleName").text();
+
+  // stores last search to the local storage
+  localStorage.setItem("lastCocktail", lastSearch);
 }
+
+function getNinja() {
+  var nutritionString = $("#ingredients-container").text();
+
+  $("#multipleSub").off();
+  // LOCAL VARIABLES
+  var APIKey = "K/T5UXdLDGG+gbua67VqQw==w2i8da76oBKobzcv";
+
+  $.ajax({
+    method: 'GET',
+    url: 'https://api.calorieninjas.com/v1/nutrition?query=' + nutritionString,
+    headers: {
+      'X-Api-Key': APIKey
+    },
+    contentType: 'application/json',
+    success: function (data) {
+
+      // NUTRITION ARRAY VAR
+      var calArr = [];
+      var fatArr = [];
+      var proteinArr = [];
+      var carbsArr = [];
+      var sugarsArr = [];
+
+      // NUTRITION SUM VAR
+      var sum = 0;
+      var calSum = 0;
+      var fatSum = 0;
+      var proteinSum = 0;
+      var carbsSum = 0;
+      var sugarsSum = 0;
+
+      console.log(data.items)
+
+      // PUSHING DATA ITEMS TO ARRAY, TURNING INTO INT
+      for (let i = 0; i < data.items.length; i++) {
+
+        calArr.push(parseInt(data.items[i].calories));
+        calSum = calSum + parseInt(data.items[i].calories);
+
+        fatArr.push(parseInt(data.items[i].fat_total_g));
+        fatSum = fatSum + parseInt(data.items[i].fat_total_g);
+
+        carbsArr.push(parseInt(data.items[i].carbohydrates_total_g));
+        carbsSum = carbsSum + parseInt(data.items[i].carbohydrates_total_g);
+
+        proteinArr.push(parseInt(data.items[i].protein_g));
+        proteinSum = proteinSum + parseInt(data.items[i].protein_g);
+
+        sugarsArr.push(parseInt(data.items[i].sugar_g));
+        sugarsSum = sugarsSum + parseInt(data.items[i].sugar_g);
+
+      }
+      // ADDING EACH ARRAY FOR A TOTAL SUM
+      $.each(calArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(fatArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(carbsArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(proteinArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+      $.each(sugarsArr, function () {
+        sum += parseFloat(this) || 0;
+      });
+
+      // ADDING EACH FINAL SUM TO THE HTML
+      $("#calorieNum").html(calSum + " calories");
+      $("#proteinNum").html(proteinSum + " grams of protein");
+      $("#fatNum").html(fatSum + " grams of fat");
+      $("#carbNum").html(carbsSum + " grams of carbohydrates");
+      $("#sugarNum").html(sugarsSum + " grams of sugar");
+    },
+
+    error: function ajaxError(jqXHR) {
+      console.error('Error: ', jqXHR.responseText);
+    }
+
+  });
+  return;
+};
+
+// Bug fixes:
+// Search by name is broken. Continues to pull up modal. 
+// Fix: add searchCounter, +1 after a search of the same name, reset to 0 after each time a recipe is populated.
+// -Nutrition sometimes populates, sometimes does not.
+// find new way to search drinks with multiple results
+
+// Ideas for further improvements (sprinkles):
+// -Convert CL (centiliters) to oz before running it through the sum function. 1 CL = 0.34 oz
