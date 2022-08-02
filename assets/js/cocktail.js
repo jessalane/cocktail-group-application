@@ -327,7 +327,7 @@ function populateRecipe(data) {
       // appending the converted measurements and ingredients to the html
       for (i = 0; i < convertedMeasurements.length; i++) {
         $("#ingredients-container").append(`<li> ● ${convertedMeasurements[i]} of ${ingredients[i].ingredient}</li>`);
-        console.log(convertedMeasurements);
+ 
       };
     });
   });
