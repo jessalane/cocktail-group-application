@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Title Page</title>
+  <title>Cocktail Database</title>
   <!--jass css-->
   <link rel="stylesheet" type="text/css" href="./assets/jass.css" />
   <!--local css-->
@@ -51,6 +51,7 @@
 
 
 
+  <!--begin hero-->
   <section class="hero is-fullheight is-primary heroStyle">
     <div class="hero-body">
       <div class="container">
@@ -63,6 +64,7 @@
       </div>
     </div>
   </section>
+  <!--end hero-->
 
   <!--search and recipe container-->
   <div id="searchSection" class="columns is-desktop" style="padding: 20px;">
@@ -112,6 +114,7 @@
         <p id="subGlass" class="subtitle is-6">type of recommended glass</p>
         <ul style="margin-left: 50px;">
           <p>Ingredients:</p>
+          <button class="button is-primary" id="convert">Convert to oz.</button>
           <div id="ingredients-container" class="list-group">
 
           </div>
@@ -122,7 +125,7 @@
         <div id="nutritionData">
           <div class="table-container">
             <table class="table is-striped is-hoverable">
-              <!-- Your table content -->
+              <!-- Your nutriton table content -->
               <tr>
                 <td>
                   <b>protein:</b>

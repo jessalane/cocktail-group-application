@@ -126,14 +126,7 @@ function selectMultiple(data) {
       "visibility": "hidden"
     });
 
-    if (searchParameters.length > 0) {
-      populateRecipe(data);
-      getApi(searchParameters);
-    } else {
-      // sends new search parameters to get Api
-      getApi(searchParameters);
-    }
-    // $("#multipleSub").off();
+    getApi2(searchParameters);
   })
 }
 
@@ -284,9 +277,61 @@ function populateRecipe(data) {
         
     };
 
-  }
+    // sets click event on the convert button
+    $("#convert").click(function (event) {
+      event.preventDefault();
 
-    )}
+      // sets measurements in an array
+      var measureArr = [{
+        "measure": drinks.strMeasure1
+      }, {
+        "measure": drinks.strMeasure2
+      }, {
+        "measure": drinks.strMeasure3
+      }, {
+        "measure": drinks.strMeasure4
+      }, {
+        "measure": drinks.strMeasure5
+      }, {
+        "measure": drinks.strMeasure6
+      }, {
+        "measure": drinks.strMeasure7
+      }, {
+        "measure": drinks.strMeasure8
+      }, {
+        "measure": drinks.strMeasure9
+      }, {
+        "measure": drinks.strMeasure10
+      }, {
+        "measure": drinks.strMeasure11
+      }, {
+        "measure": drinks.strMeasure12
+      }, {
+        "measure": drinks.strMeasure13
+      }, {
+        "measure": drinks.strMeasure14
+      }, {
+        "measure": drinks.strMeasure15
+      }];
+
+      // filtering the measurements array to convert it to oz
+      var filterdMeasurements = measureArr.filter(item => item.measure)
+      // var ryan = measureArr.filter(function(item) { return item.measure })
+      var convertedMeasurements = filterdMeasurements.map(measure => {
+        var splitter = measure.measure.split(" ")[0];
+        return `${Math.round(splitter * 0.34 * 100) / 100} oz.`;
+      });
+
+      // emptying the ingredients container
+      $("#ingredients-container").empty();
+      // appending the converted measurements and ingredients to the html
+      for (i = 0; i < convertedMeasurements.length; i++) {
+        $("#ingredients-container").append(`<li> ● ${convertedMeasurements[i]} of ${ingredients[i].ingredient}</li>`);
+        
+      };
+    });
+  }
+  // rotating through the pushIngredient function for each ingredient 
   $.each(pushIngredient(ingredients.ingredient));
   getNinja();
 
@@ -381,12 +426,3 @@ function getNinja() {
   });
   return;
 };
-
-// Bug fixes:
-// Search by name is broken. Continues to pull up modal. 
-// Fix: add searchCounter, +1 after a search of the same name, reset to 0 after each time a recipe is populated.
-// -Nutrition sometimes populates, sometimes does not.
-// find new way to search drinks with multiple results
-
-// Ideas for further improvements (sprinkles):
-// -Convert CL (centiliters) to oz before running it through the sum function. 1 CL = 0.34 oz
